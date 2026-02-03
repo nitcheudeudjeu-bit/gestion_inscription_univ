@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Mes documents</h2>
+
+<div class="card p-4 shadow">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label>Photo</label>
+            <input type="file" name="photo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Acte de naissance</label>
+            <input type="file" name="acte_naissance" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Diplôme</label>
+            <input type="file" name="diplome" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Enregistrer les documents
+        </button>
+    </form>
+</div>
+{% endblock %}
+

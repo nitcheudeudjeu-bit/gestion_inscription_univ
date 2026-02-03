@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscription Étudiant</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input, select, button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+        button {
+            background: #0d6efd;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Inscription Étudiant</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="first_name" placeholder="Prénom" required>
+        <input type="text" name="last_name" placeholder="Nom" required>
+
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+
+        <input type="text" name="matricule" placeholder="Matricule" required>
+        <input type="date" name="date_naissance" required>
+        <input type="text" name="telephone" placeholder="Téléphone" required>
+
+        <select name="level" required>
+            <option value="">-- Niveau --</option>
+            {% for level in levels %}
+                <option value="{{ level.id }}">{{ level.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="program" required>
+            <option value="">-- Programme --</option>
+            {% for program in programs %}
+                <option value="{{ program.id }}">{{ program.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+</div>
+
+</body>
+</html>
+

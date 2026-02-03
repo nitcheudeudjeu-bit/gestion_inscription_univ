@@ -1,0 +1,17 @@
+<h2>Inscription réussie ! 🎉</h2>
+<p>Vous pouvez maintenant vous connecter avec votre compte.</p>
+{% extends "base.html" %}
+
+{% block title %}Paiement réussi{% endblock %}
+
+{% block content %}
+<div class="alert alert-success text-center">
+    <h4>✅ Paiement effectué avec succès</h4>
+    <p>Votre paiement a été enregistré.</p>
+
+    <a href="{% url 'student_dashboard' %}" class="btn btn-primary">
+        Retour au dashboard
+    </a>
+</div>
+{% endblock %}
+

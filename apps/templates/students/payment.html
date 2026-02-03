@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-body text-center">
+        <h4>Paiement des Droits Universitaires</h4>
+        <p><strong>Montant :</strong> {{ amount }} FCFA</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success btn-lg">
+                Payer avec Mobile Money
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

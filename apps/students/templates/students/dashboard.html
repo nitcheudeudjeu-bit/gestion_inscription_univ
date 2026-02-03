@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- En-tête avec logo -->
+<div class="d-flex align-items-center mb-4">
+    <img src="{% static 'images/university_logo.png' %}" 
+         alt="Université de Yaoundé I" 
+         width="80" height="80" 
+         class="me-3">
+    <div>
+        <h2 class="mb-0">Université de Yaoundé I</h2>
+        <small class="text-muted">Tableau de bord étudiant</small>
+    </div>
+</div>
+
+<!-- Informations personnelles -->
+<div class="card p-4 shadow mb-4">
+    <h4>Informations personnelles</h4>
+    <p><strong>Nom :</strong> {{ student.first_name }} {{ student.last_name }}</p>
+    <p><strong>Matricule :</strong> {{ student.matricule }}</p>
+    <p><strong>Email :</strong> {{ student.email }}</p>
+    <p><strong>Téléphone :</strong> {{ student.telephone }}</p>
+    <p><strong>Date de naissance :</strong> {{ student.date_naissance|date:"d/m/Y" }}</p>
+    <p><strong>Niveau :</strong> {{ student.level }}</p>
+    <p><strong>Programme :</strong> {{ student.program }}</p>
+    <a href="{% url 'edit_student_profile' %}" class="btn btn-warning mt-2">
+        Modifier mon profil
+    </a>
+</div>
+
+<!-- Documents -->
+<div class="card p-4 shadow mb-4">
+    <h4>Documents</h4>
+
+    {% if student.documents %}
+        {% if student.documents.photo %}
+            <p><strong>Photo :</strong><br>
+            <img src="{{ student.documents.photo.url }}" width="150"></p>
+        {% endif %}
+
+        {% if student.documents.acte_naissance %}
+            <p><strong>Acte de naissance :</strong>
+            <a href="{{ student.documents.acte_naissance.url }}" target="_blank">
+                Voir / Télécharger
+            </a></p>
+        {% endif %}
+
+        {% if student.documents.diplome %}
+            <p><strong>Diplôme :</strong>
+            <a href="{{ student.documents.diplome.url }}" target="_blank">
+                Voir / Télécharger
+            </a></p>
+        {% endif %}
+
+        <!-- Statut des documents -->
+        <p>
+            <strong>Statut documents :</strong>
+            {% if student.documents.is_validated %}
+                ✅ Validés
+            {% elif student.documents.is_refused %}
+                ❌ Refusés
+                {% if student.documents.admin_comment %}
+                    <br><strong>Motif :</strong> {{ student.documents.admin_comment }}
+                {% endif %}
+            {% else %}
+                ⏳ En attente de validation
+            {% endif %}
+        </p>
+
+    {% else %}
+        <p>Aucun document n'a été uploadé.</p>
+    {% endif %}
+</div>
+
+<!-- Boutons d'actions -->
+<div class="mb-3">
+    <a href="{% url 'upload_documents' %}" class="btn btn-warning">
+        Mes documents
+    </a>
+    <a href="{% url 'student_confirmation_pdf' %}" class="btn btn-success" target="_blank">
+        📄 Télécharger l’attestation d’inscription
+    </a>
+</div>
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Étudiant</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .card {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card p-4 shadow">
+        <h3 class="mb-3 text-center">Inscription Étudiant</h3>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <label>Nom</label>
+            <input type="text" name="first_name" class="form-control mb-2" required>
+
+            <label>Prénom</label>
+            <input type="text" name="last_name" class="form-control mb-2" required>
+
+            <label>Nom d'utilisateur</label>
+            <input type="text" name="username" class="form-control mb-2" required>
+
+            <label>Email</label>
+            <input type="email" name="email" class="form-control mb-2" required>
+
+            <label>Mot de passe</label>
+            <input type="password" name="password" class="form-control mb-2" required>
+
+            <label>Matricule</label>
+            <input type="text" name="matricule" class="form-control mb-2" required>
+
+            <label>Date de naissance</label>
+            <input type="date" name="date_naissance" class="form-control mb-2" required>
+
+            <label>Téléphone</label>
+            <input type="text" name="telephone" class="form-control mb-2" required>
+
+            <label>Niveau</label>
+            <select name="level" class="form-control mb-2" required>
+                {% for level in levels %}
+                    <option value="{{ level.id }}">{{ level }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Programme</label>
+            <select name="program" class="form-control mb-3" required>
+                {% for program in programs %}
+                    <option value="{{ program.id }}">{{ program }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+        </form>
+    </div>
+</body>
+</html>
+

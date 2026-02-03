@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card p-4 shadow mx-auto" style="max-width: 500px;">
+    <h3>Uploader vos documents</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Photo</label>
+        <input type="file" name="photo" class="form-control mb-2">
+
+        <label>Acte de naissance</label>
+        <input type="file" name="acte_naissance" class="form-control mb-2">
+
+        <label>Diplôme</label>
+        <input type="file" name="diplome" class="form-control mb-3">
+
+        <button class="btn btn-primary">Uploader</button>
+    </form>
+</div>
+{% endblock %}
+

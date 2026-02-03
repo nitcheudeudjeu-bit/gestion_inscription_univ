@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Modifier mon profil</h2>
+
+<form method="POST" enctype="multipart/form-data" class="card p-4 shadow mb-4">
+    {% csrf_token %}
+
+    <label>Matricule</label>
+    <input class="form-control mb-2" value="{{ student.matricule }}" disabled>
+
+    <label>Téléphone</label>
+    <input name="telephone" class="form-control mb-2" value="{{ student.telephone }}">
+
+    <label>Date de naissance</label>
+    <input type="date" name="date_naissance" class="form-control mb-2"
+           value="{{ student.date_naissance|date:'Y-m-d' }}">
+
+    <label>Niveau</label>
+    <select name="level" class="form-control mb-2">
+        {% for level in levels %}
+            <option value="{{ level.id }}" {% if level == student.level %}selected{% endif %}>
+                {{ level }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Programme</label>
+    <select name="program" class="form-control mb-3">
+        {% for program in programs %}
+            <option value="{{ program.id }}" {% if program == student.program %}selected{% endif %}>
+                {{ program }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <h4>Documents</h4>
+    <label>Photo</label>
+    <input type="file" name="photo" class="form-control mb-2">
+
+    <label>Acte de naissance</label>
+    <input type="file" name="acte_naissance" class="form-control mb-2">
+
+    <label>Diplôme</label>
+    <input type="file" name="diplome" class="form-control mb-3">
+
+    <button class="btn btn-primary">Mettre à jour</button>
+</form>
+{% endblock %}
+

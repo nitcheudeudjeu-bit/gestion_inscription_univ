@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="mb-4">Bienvenue, {{ student.user.first_name }} {{ student.user.last_name }}</h2>
+
+    <div class="card p-3 shadow">
+        <h5>Informations personnelles</h5>
+        <p><strong>Matricule :</strong> {{ student.matricule }}</p>
+        <p><strong>Email :</strong> {{ student.user.email }}</p>
+        <p><strong>Téléphone :</strong> {{ student.telephone }}</p>
+        <p><strong>Date de naissance :</strong> {{ student.date_naissance|date:"d/m/Y" }}</p>
+        <p><strong>Niveau :</strong> {{ student.level }}</p>
+        <p><strong>Programme :</strong> {{ student.program }}</p>
+        <a href="{% url 'edit_student_profile' %}" class="btn btn-warning mt-2">Modifier mon profil</a>
+    </div>
+
+    <div class="card p-3 shadow">
+        <h5>Documents</h5>
+        {% if student.documents %}
+            <p><strong>Photo :</strong> <a href="{{ student.documents.photo.url }}" target="_blank">Voir</a></p>
+            <p><strong>Acte de naissance :</strong> <a href="{{ student.documents.acte_naissance.url }}" target="_blank">Voir</a></p>
+            <p><strong>Diplôme :</strong> <a href="{{ student.documents.diplome.url }}" target="_blank">Voir</a></p>
+        {% else %}
+            <p>Pas de documents uploadés pour le moment.</p>
+        {% endif %}
+    </div>
+    <a href="{% url 'student_payment' %}" class="btn btn-warning">
+    💳 Payer les droits universitaires
+</a>
+
+    <a href="{% url 'student_logout' %}" class="btn btn-danger mt-3">Se déconnecter</a>
+</div>
+</body>
+</html>
+
