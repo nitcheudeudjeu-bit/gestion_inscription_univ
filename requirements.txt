@@ -47,7 +47,7 @@ bcrypt==5.0.0
 beautifulsoup4==4.14.3
 bidict==0.23.1
 billiard==4.2.4
-binwalk==2.4.3
+binwalk==2.1.0
 bitstruct==8.21.0
 bleach==6.3.0
 blinker==1.9.0
@@ -694,9 +694,6 @@ zope.event==6.0
 zope.interface==8.2
 zopfli==0.4.0
 zstandard==0.25.0
-Django>=4.2
-gunicorn
-whitenoise
 Django>=4.2
 gunicorn
 whitenoise
