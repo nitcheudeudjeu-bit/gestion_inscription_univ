@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: gestion-inscription-univ
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn gestion_inscription_univ.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: gestion_inscription_univ.settings
+
